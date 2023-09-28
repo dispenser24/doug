@@ -1,0 +1,183 @@
+#pragma region VEXcode Generated Robot Configuration
+// Make sure all required headers are included.
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#include <string.h>
+
+
+#include "vex.h"
+
+using namespace vex;
+
+// Brain should be defined by default
+brain Brain;
+
+
+// START V5 MACROS
+#define waitUntil(condition)                                                   \
+  do {                                                                         \
+    wait(5, msec);                                                             \
+  } while (!(condition))
+
+#define repeat(iterations)                                                     \
+  for (int iterator = 0; iterator < iterations; iterator++)
+// END V5 MACROS
+
+
+// Robot configuration code.
+motor backleft = motor(PORT1, ratio6_1, false);
+
+motor backright = motor(PORT2, ratio6_1, false);
+
+motor frontleft = motor(PORT3, ratio6_1, false);
+
+motor frontright = motor(PORT4, ratio6_1, false);
+
+controller Controller1 = controller(primary);
+
+
+
+// Helper to make playing sounds from the V5 in VEXcode easier and
+// keeps the code cleaner by making it clear what is happening.
+void playVexcodeSound(const char *soundName) {
+  printf("VEXPlaySound:%s\n", soundName);
+  wait(5, msec);
+}
+
+
+
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
+
+#pragma endregion VEXcode Generated Robot Configuration
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       {author}                                                  */
+/*    Created:      {date}                                                    */
+/*    Description:  V5 project                                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// Include the V5 Library
+#include "vex.h"
+  
+// Allows for easier use of the VEX Library
+using namespace vex;
+
+
+
+/*
+
+handy dandy motor reference:
+
+backleft = port 1
+backright = port 2
+frontleft = port 3
+frontright = port 4
+
+*/
+
+//left motors go forward
+void fwd_lft()
+{
+  backleft.spin(forward);
+  frontleft.spin(forward);
+}
+
+//left motors go backward
+void rev_lft()
+{
+  backleft.spin(reverse);
+  frontleft.spin(reverse);
+}
+
+//right motors go forward
+void fwd_rig()
+{
+  backright.spin(forward);
+  frontleft.spin(forward);
+}
+
+//right motors go backward
+void rev_rig()
+{
+  backright.spin(reverse);
+  frontright.spin(reverse);
+}
+
+
+
+//init main function
+int main()
+{
+  //todo: add autonomous
+
+
+  //mainloop for controller, to be changed
+  while (1)
+  {
+    //is L1 pressed?
+    int ispressedL1 = Controller1.ButtonL1.pressing();
+    switch (ispressedL1)
+    {
+      case 0:
+        //if no, stop the L1 motors
+        //this is done because the motors are global
+        //and thus are not stopped when the fucntion ends
+        backleft.stop();
+        frontleft.stop();
+        break;
+      default:
+        //if yes, use the function above
+        fwd_lft();
+    }
+
+//is R1 pressed?
+    int ispressedR1 = Controller1.ButtonR1.pressing();
+    switch (ispressedR1)
+    {
+      case 0:
+        //if no, stop the R1 motors
+        backright.stop();
+        frontright.stop();
+        break;
+      default:
+        //if yes, use the function above
+        fwd_rig();
+    }
+
+//is L2 pressed?
+    int ispressedL2 = Controller1.ButtonL2.pressing();
+    switch (ispressedL2)
+    {
+      case 0:
+        //if no, stop the L2 motors
+        backleft.stop();
+        frontleft.stop();
+        break;
+      default:
+        //if yes, use the function above
+        rev_lft();
+    }
+
+//is R2 pressed?
+    int ispressedR2 = Controller1.ButtonL1.pressing();
+    switch (ispressedR2)
+    {
+      case 0:
+        //if no, stop the R2 motors
+        backright.stop();
+        frontright.stop();
+        break;
+      default:
+        //if yes, use the function above
+        rev_rig();
+    }
+
+
+  }
+}
