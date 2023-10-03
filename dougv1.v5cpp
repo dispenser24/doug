@@ -27,13 +27,13 @@ brain Brain;
 
 
 // Robot configuration code.
-motor backleft = motor(PORT1, ratio6_1, false);
+motor backleft = motor(PORT12, ratio6_1, false);
 
-motor backright = motor(PORT2, ratio6_1, false);
+motor backright = motor(PORT13, ratio6_1, false);
 
-motor frontleft = motor(PORT3, ratio6_1, false);
+motor frontleft = motor(PORT11, ratio6_1, false);
 
-motor frontright = motor(PORT4, ratio6_1, false);
+motor frontright = motor(PORT14, ratio6_1, false);
 
 controller Controller1 = controller(primary);
 
@@ -74,10 +74,10 @@ using namespace vex;
 
 handy dandy motor reference:
 
-backleft = port 1
-backright = port 2
-frontleft = port 3
-frontright = port 4
+backleft = port 12
+backright = port 13
+frontleft = port 11
+frontright = port 14
 
 */
 
