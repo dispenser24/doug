@@ -136,7 +136,7 @@ using namespace vex;
 //this is used to take triballs into the robot
 void spinintake()
 {
-  intake.spinFor(forward, 5, turns, false)
+  intake.spinFor(forward, 4, turns, false)
 }
 
 int main() 
