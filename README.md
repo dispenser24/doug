@@ -15,3 +15,7 @@ dougv2 - better, but still obsolete, refer to dougv3
 dougv3 - current version.  if any major changes occur ill make a new file instead of editing v3
          this version allows for the robot to be driven with the joysticks, freeing up the buttons/bumpers for other things 
          (motors, pneumatics, etc)
+
+dougv4/v5 - lost to time (and my filesystem)
+
+dougv6 - PNEUMATICS YAY
