@@ -19,3 +19,5 @@ dougv3 - current version.  if any major changes occur ill make a new file instea
 dougv4/v5 - lost to time (and my filesystem)
 
 dougv6 - PNEUMATICS YAY
+
+dougv7 - removed intake - added a catapult.  also fixed controller inversion.
