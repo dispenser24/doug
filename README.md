@@ -21,3 +21,5 @@ dougv4/v5 - lost to time (and my filesystem)
 dougv6 - PNEUMATICS YAY
 
 dougv7 - removed intake - added a catapult.  also fixed controller inversion.
+
+dougv8 - fully coded in the catapult
