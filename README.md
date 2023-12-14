@@ -23,3 +23,8 @@ dougv6 - PNEUMATICS YAY
 dougv7 - removed intake - added a catapult.  also fixed controller inversion.
 
 dougv8 - fully coded in the catapult
+
+dougv9COMP - CURRENT VERSION
+           - the competition format version - entire code was overhauled into blocks, then translated back into text
+           - essentially a better version of the previous ones along with our own drivetrain code (instead of using the given one)
+
