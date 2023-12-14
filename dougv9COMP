@@ -198,6 +198,7 @@ void VEXcode_auton_task() {
 
 
 int main() {
+  // misc competition stuff
   vex::competition::bStopTasksBetweenModes = false;
   Competition.autonomous(VEXcode_auton_task);
   Competition.drivercontrol(VEXcode_driver_task);
