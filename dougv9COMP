@@ -1,0 +1,214 @@
+competition Competition;
+
+// User defined function
+void myblockfunction_testingProgram();
+// User defined function
+void myblockfunction_refreshControllerScreen_Num(double myblockfunction_refreshControllerScreen_Num__Num);
+// User defined function
+void myblockfunction_move_backward_In_inches(double myblockfunction_move_backward_In_inches__In);
+// User defined function
+void myblockfunction_turn_right_Deg_degrees(double myblockfunction_turn_right_Deg_degrees__Deg);
+// User defined function
+void myblockfunction_turn_left_Deg_degrees(double myblockfunction_turn_left_Deg_degrees__Deg);
+// User defined function
+void myblockfunction_move_forward_In_inches(double myblockfunction_move_forward_In_inches__In);
+
+int Brain_precision = 0, Console_precision = 0, Controller1_precision = 0;
+
+float myVariable, drivingCoeff, turningCoeff, aHeld;
+
+// User defined function
+void myblockfunction_testingProgram() {
+  // robot functions test
+  drivingCoeff = 0.15;
+  turningCoeff = 0.4;
+  while (true) {
+    if (Controller1.ButtonUp.pressing()) {
+      drivingCoeff = drivingCoeff + 0.1;
+      myblockfunction_refreshControllerScreen_Num(drivingCoeff);
+      waitUntil((!Controller1.ButtonUp.pressing()));
+    }
+    else {
+      if (Controller1.ButtonDown.pressing()) {
+        drivingCoeff = drivingCoeff + -0.1;
+        myblockfunction_refreshControllerScreen_Num(drivingCoeff);
+        waitUntil((!Controller1.ButtonDown.pressing()));
+      }
+      else {
+        if (Controller1.ButtonRight.pressing()) {
+          drivingCoeff = drivingCoeff + 0.01;
+          myblockfunction_refreshControllerScreen_Num(drivingCoeff);
+          waitUntil((!Controller1.ButtonRight.pressing()));
+        }
+        else {
+          if (Controller1.ButtonLeft.pressing()) {
+            drivingCoeff = drivingCoeff + -0.01;
+            myblockfunction_refreshControllerScreen_Num(drivingCoeff);
+            waitUntil((!Controller1.ButtonLeft.pressing()));
+          }
+          else {
+            if (Controller1.ButtonA.pressing()) {
+              pult.spinFor(forward, 360.0, degrees, true);
+            }
+            else {
+              if (Controller1.ButtonR2.pressing()) {
+                DigitalOutH.set(true);
+              }
+              else {
+                if (Controller1.ButtonR1.pressing()) {
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  wait(5, msec);
+  }
+}
+
+// User defined function
+void myblockfunction_refreshControllerScreen_Num(double myblockfunction_refreshControllerScreen_Num__Num) {
+  // self explanitory (clear function screen)
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(1, 1);
+  Controller1.Screen.print(printToController1_numberFormat(), static_cast<float>(myblockfunction_refreshControllerScreen_Num__Num * 100.0));
+}
+
+// User defined function
+void myblockfunction_move_backward_In_inches(double myblockfunction_move_backward_In_inches__In) {
+  // function for moving forward, args are how much you want to go forward (in inches)
+  RightDT.spin(reverse, 5.0, volt);
+  LeftDT.spin(reverse, 5.0, volt);
+  wait(((3.37 * myblockfunction_move_backward_In_inches__In) / 100.0), seconds);
+  RightDT.stop();
+  LeftDT.stop();
+}
+
+// User defined function
+void myblockfunction_turn_right_Deg_degrees(double myblockfunction_turn_right_Deg_degrees__Deg) {
+  // function for turning right, args are the degrees you want to turn
+  RightDT.spin(reverse, 5.0, volt);
+  LeftDT.spin(forward, 5.0, volt);
+  wait(((0.45 * myblockfunction_turn_right_Deg_degrees__Deg) / 100.0), seconds);
+  RightDT.stop();
+  LeftDT.stop();
+}
+
+// User defined function
+void myblockfunction_turn_left_Deg_degrees(double myblockfunction_turn_left_Deg_degrees__Deg) {
+  // function for turning left, args are the degrees you want to turn
+  RightDT.spin(forward, 5.0, volt);
+  LeftDT.spin(reverse, 5.0, volt);
+  wait(((0.59 * myblockfunction_turn_left_Deg_degrees__Deg) / 100.0), seconds);
+  RightDT.stop();
+  LeftDT.stop();
+}
+
+// User defined function
+void myblockfunction_move_forward_In_inches(double myblockfunction_move_forward_In_inches__In) {
+  // function for moving backward, args are how much you want to go backward(in inches)
+  RightDT.spin(forward, 5.0, volt);
+  LeftDT.spin(forward, 5.0, volt);
+  wait(((3.37 * myblockfunction_move_forward_In_inches__In) / 100.0), seconds);
+  RightDT.stop();
+  LeftDT.stop();
+}
+
+// "when autonomous" hat block
+int onauton_autonomous_0() {
+  myblockfunction_move_forward_In_inches(45.0);
+  wait(1.0, seconds);
+  myblockfunction_move_backward_In_inches(13.5);
+  wait(0.2, seconds);
+  myblockfunction_turn_left_Deg_degrees(60.0);
+  myblockfunction_move_forward_In_inches(10.0);
+  wait(0.6, seconds);
+  myblockfunction_turn_right_Deg_degrees(10.0);
+  myblockfunction_move_forward_In_inches(8.0);
+  return 0;
+}
+
+// "when driver control" hat block
+int ondriver_drivercontrol_0() {
+  while (true) {
+    // driving functions
+    if (Controller1.Axis2.position() > 10.0) {
+      RightDT.spin(forward, (fabs(static_cast<float>(Controller1.Axis2.position())) * drivingCoeff), volt);
+    }
+    else {
+      if (-10.0 > Controller1.Axis2.position()) {
+        RightDT.spin(reverse, (fabs(static_cast<float>(Controller1.Axis2.position())) * drivingCoeff), volt);
+      }
+      else {
+        RightDT.stop();
+      }
+    }
+    if (Controller1.Axis3.position() > 10.0) {
+      LeftDT.spin(forward, (fabs(static_cast<float>(Controller1.Axis3.position())) * drivingCoeff), volt);
+    }
+    else {
+      if (-10.0 > Controller1.Axis3.position()) {
+        LeftDT.spin(reverse, (fabs(static_cast<float>(Controller1.Axis3.position())) * drivingCoeff), volt);
+      }
+      else {
+        LeftDT.stop();
+      }
+    }
+    // catapult
+    if (Controller1.ButtonA.pressing()) {
+      pult.spinFor(forward, 360.0, degrees, true);
+    }
+    // next two are for pneumatics
+    if (Controller1.ButtonR2.pressing()) {
+      DigitalOutH.set(true);
+    }
+    else {
+      if (Controller1.ButtonR1.pressing()) {
+        DigitalOutH.set(false);
+      }
+    }
+  wait(5, msec);
+  }
+  return 0;
+}
+
+// "when started" hat block
+int whenStarted1() {
+  myblockfunction_testingProgram();
+  return 0;
+}
+
+void VEXcode_driver_task() {
+  // Start the driver control tasks....
+  vex::task drive0(ondriver_drivercontrol_0);
+  while(Competition.isDriverControl() && Competition.isEnabled()) {this_thread::sleep_for(10);}
+  drive0.stop();
+  return;
+}
+
+void VEXcode_auton_task() {
+  // Start the auton control tasks....
+  vex::task auto0(onauton_autonomous_0);
+  while(Competition.isAutonomous() && Competition.isEnabled()) {this_thread::sleep_for(10);}
+  auto0.stop();
+  return;
+}
+
+
+
+int main() {
+  vex::competition::bStopTasksBetweenModes = false;
+  Competition.autonomous(VEXcode_auton_task);
+  Competition.drivercontrol(VEXcode_driver_task);
+
+  // post event registration
+
+  // set default print color to black
+  printf("\033[30m");
+
+  // wait for rotation sensor to fully initialize
+  wait(30, msec);
+
+  whenStarted1();
+}
